@@ -1,73 +1,34 @@
 public class DoubleNode {
-  private Node head;
-  private int size;
+  private double value;
+  private DoubleNode next;
 
   public DoubleNode() {
-    head = null;
-    size = 0;
+    this.value = 0;
+    this.next = null;
   }
 
-  // addFirst
-  public void addFirst(int data) {
-    if (head == null) {
-      head = new Node(data);
-    }
-    Node newNode = new Node(data);
-    newNode.setNext(head);
-    head.setPrev(newNode);
-    head = newNode;
-    size++;
+  public DoubleNode(double value) {
+    this.value = value;
+    this.next = null;
+  }
+  public DoubleNode(double value, DoubleNode next) {
+    this.value = value;
+    this.next = next;
   }
 
-  // remove
-  public void remove(int data) {
-    if (head == null) {
-      return;
-    }
-    if (head.getValue() == data) {
-      head = head.getNext();
-      head.setPrev(null);
-      size--;
-      return;
-    }
-    Node current = head;
-    while (current.getNext() != null) {
-      if (current.getNext().getValue() == data) {
-        current.setNext(current.getNext().getNext());
-        if (current.getNext() != null) {
-          current.getNext().setPrev(current);
-        }
-        size--;
-        return;
-      }
-      current = current.getNext();
-    }
+  public double getValue() {
+    return value;
   }
 
-  // find
-  public boolean find(int data) {
-    if (head == null) {
-      return false;
-    }
-    Node current = head;
-    while (current != null) {
-      if (current.getValue() == data) {
-        return true;
-      }
-      current = current.getNext();
-    }
-    return false;
+  public DoubleNode getNext() {
+    return next;
   }
 
-  public void print() {
-    if (head == null) {
-      return;
-    }
-    Node current = head;
-    while (current != null) {
-      System.out.print(current.getValue() + " ");
-      current = current.getNext();
-    }
-    System.out.println();
+  public void setNext(DoubleNode next) {
+    this.next = next;
+  }
+  @Override
+  public String toString() {
+    return Double.toString(value);
   }
 }
