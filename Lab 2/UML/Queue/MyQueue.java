@@ -11,7 +11,6 @@ public class MyQueue<E> implements QueueInterface<E> {
 
   @Override
   public void enQueue(E item) {
-    // TODO Auto-generated method stub
     Node<E> newNode = new Node<E>(item);
     if (isEmpty()) {
       front = newNode;
@@ -27,7 +26,6 @@ public class MyQueue<E> implements QueueInterface<E> {
 
   @Override
   public E deQueue() {
-    // TODO Auto-generated method stub
     if (isEmpty()) {
       return null;
     }
@@ -44,7 +42,9 @@ public class MyQueue<E> implements QueueInterface<E> {
 
   @Override
   public boolean contains(E item) {
-    // TODO Auto-generated method stub
+    if (isEmpty()) {
+      return false;
+    }
     Node<E> temp = front;
     while (temp != null) {
       if (temp.getData().equals(item)) {
@@ -57,6 +57,9 @@ public class MyQueue<E> implements QueueInterface<E> {
 
   @Override
   public void print() {
+    if (isEmpty()) {
+      return;
+    }
     Node<E> temp = front;
     while (temp != null) {
       System.out.print(temp.getData() + " ");
@@ -68,13 +71,16 @@ public class MyQueue<E> implements QueueInterface<E> {
 
   @Override
   public boolean isEmpty() {
-    // TODO Auto-generated method stub
     return numNode == 0;
   }
 
   @Override
   public E getFront() {
+    if (isEmpty()) {
+      return null;
+    }
     return front.getData();
   }
 
 }
+
