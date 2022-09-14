@@ -28,7 +28,7 @@ public class Test {
 
   public static boolean isPrime(int n) {
     if (n <= 2) {
-      return n == 2 ? true : false;
+      return n == 2;
     }
     if (n % 2 == 0) {
       return false;
