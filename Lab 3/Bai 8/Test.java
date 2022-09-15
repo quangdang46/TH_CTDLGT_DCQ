@@ -15,5 +15,6 @@ public class Test {
     System.out.println("sum " + list.sumLinkedList(list.getFirst()));
     //test git
     
+    
   }
 }
