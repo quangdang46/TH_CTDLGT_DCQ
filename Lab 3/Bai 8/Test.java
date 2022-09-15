@@ -7,7 +7,7 @@ public class Test {
     list.add(4);
     list.add(5);
     //error
-    list.addSortedList(5, list.getFirst());
+    list.addSortedList(7, list.getFirst());
 
     list.print();
     System.out.println();

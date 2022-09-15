@@ -55,6 +55,20 @@ public class MyLinkedList<E> implements ListInterface<E> {
 
   @Override
   public void addSortedList(E item, Node<E> curr) {
+    // Node<E> newNode = new Node<E>(item);
+    // if (curr == null) {
+    //   curr = newNode;
+    //   size++;
+    //   return;
+    // }
+    
+    // if (curr.getNext().compareTo(newNode) > 0) {
+    //   newNode.setNext(curr.getNext());
+    //   curr.setNext(newNode);
+    //   size++;
+    //   return;
+    // }
+    // addSortedList(item, curr.getNext());
     return;
   }
 
@@ -62,10 +76,7 @@ public class MyLinkedList<E> implements ListInterface<E> {
     if (curr == null) {
       return 0;
     }
-    if ((int) curr.getData() % 2 == 0) {
-      return 1 + countEven(curr.getNext());
-    }
-    return countEven(curr.getNext());
+    return (int) curr.getData() % 2 == 0 ? 1 + countEven(curr.getNext()) : countEven(curr.getNext());
   }
 
   public int sumLinkedList(Node<E> curr) {
