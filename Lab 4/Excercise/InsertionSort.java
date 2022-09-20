@@ -16,7 +16,6 @@ public class InsertionSort {
 
   public static void main(String[] args) {
     int[] arr = { 5, 4, 3, 2, 1, 6, 7, 10, 9, 8 };
-    // bubble_sort_v1(arr);
     insertion_sort(arr);
     Arrays.stream(arr).forEach(
         item -> {
