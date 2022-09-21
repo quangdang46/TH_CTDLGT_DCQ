@@ -1,12 +1,14 @@
 public class Main {
   public static boolean is_palidom_v0(int number) {
-    int reverse = 0;
-    int temp = number;
-    while (temp != 0) {
-      reverse = reverse * 10 + temp % 10;
-      temp /= 10;
-    }
-    return number == reverse;
+    return number == Integer.valueOf(new StringBuilder(Integer.toString(number)).reverse().toString());
+
+    // int reverse = 0;
+    // int temp = number;
+    // while (temp != 0) {
+    // reverse = reverse * 10 + temp % 10;
+    // temp /= 10;
+    // }
+    // return number == reverse;
   }
 
   public static boolean is_palidom(int number) {
