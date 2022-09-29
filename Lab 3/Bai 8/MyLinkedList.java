@@ -41,35 +41,36 @@ public class MyLinkedList<E> implements ListInterface<E> {
     }
   }
 
-  @Override
-  public E removeCurr(Node<E> curr) {
-    // chuyen gia tri node hien tai cho node tiep theo
-    curr.setData(curr.getNext().getData());
-    // xoa node tiep theo
-    Node<E> delNode = curr.getNext();
-    curr.setNext(delNode.getNext());
-    // giam size
-    size--;
-    return delNode.getData();
-  }
-
-  @Override
   public void addSortedList(E item, Node<E> curr) {
-    // Node<E> newNode = new Node<E>(item);
-    // if (curr == null) {
-    //   curr = newNode;
-    //   size++;
-    //   return;
-    // }
-    
-    // if (curr.getNext().compareTo(newNode) > 0) {
-    //   newNode.setNext(curr.getNext());
-    //   curr.setNext(newNode);
-    //   size++;
-    //   return;
-    // }
-    // addSortedList(item, curr.getNext());
-    return;
+    Node<E> newNode = new Node<E>(item);
+    if (curr == null) {
+      return;
+    }
+    //th1 node
+    if (isEmpty()) {
+      head = newNode;
+      return;
+    }
+    //th nhieu node va node moi nho hon node dau tien
+    if (newNode.compareTo(curr) >= 0) {
+      if (curr.compareTo(head) == 0) {
+        newNode.setNext(head);
+        head = newNode;
+        return;
+      }
+      //th tong quat
+      newNode.setNext(curr.getNext());
+      curr.setNext(newNode);
+      return;
+    }
+    //th node cuoi
+    if (curr.getNext() == null) {
+      curr.setNext(newNode);
+      return;
+    }
+
+    addSortedList(item, curr.getNext());
+
   }
 
   public int countEven(Node<E> curr) {

@@ -33,7 +33,6 @@ public class Node<E> {
     this.next = next;
   }
 
-  // compare to generic
   @SuppressWarnings("unchecked")
   public int compareTo(Node<E> node) {
     return ((Comparable<E>) this.data).compareTo(node.data);
