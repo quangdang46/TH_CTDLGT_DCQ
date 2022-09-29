@@ -46,24 +46,24 @@ public class MyLinkedList<E> implements ListInterface<E> {
     if (curr == null) {
       return;
     }
-    //th1 node
+    // th1 node
     if (isEmpty()) {
       head = newNode;
       return;
     }
-    //th nhieu node va node moi nho hon node dau tien
+    // th nhieu node va node moi nho hon node dau tien
     if (newNode.compareTo(curr) >= 0) {
       if (curr.compareTo(head) == 0) {
         newNode.setNext(head);
         head = newNode;
         return;
       }
-      //th tong quat
+      // th tong quat
       newNode.setNext(curr.getNext());
       curr.setNext(newNode);
       return;
     }
-    //th node cuoi
+    // th node cuoi
     if (curr.getNext() == null) {
       curr.setNext(newNode);
       return;
@@ -72,6 +72,30 @@ public class MyLinkedList<E> implements ListInterface<E> {
     addSortedList(item, curr.getNext());
 
   }
+
+  // public void addSortedList2(E item, Node<E> curr) {
+  //   Node<E> newNode = new Node<E>(item);
+  //   int l = 0;
+  //   int r = size - 1;
+  //   while (l <= r) {
+  //     int m = (l + r) / 2;
+  //     Node<E> mid = getByIndex(m);
+  //     if (mid.compareTo(newNode) == 0) {
+  //       if (mid.getNext() == null) {
+  //         mid.setNext(newNode);
+  //         return;
+  //       }
+  //       newNode.setNext(mid.getNext());
+  //       mid.setNext(newNode);
+  //       return;
+  //     }
+  //     if (mid.compareTo(newNode) > 0) {
+  //       r = m - 1;
+  //     } else {
+  //       l = m + 1;
+  //     }
+  //   }
+  // }
 
   public int countEven(Node<E> curr) {
     if (curr == null) {
