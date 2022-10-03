@@ -5,9 +5,9 @@ public class Test {
     list.addFirst('b');
     list.addFirst('A');
     list.print(list.getHead());
-    System.out.println(list.addAfterFirstKey('E', 'b'));
+    // System.out.println(list.addAfterFirstKey('E', 'b'));
     System.out.println();
     list.print(list.getHead());
-    // System.out.println(list.largestCharPostition());
+    System.out.println(list.largestCharPostition());
   }
 }
