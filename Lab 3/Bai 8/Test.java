@@ -12,5 +12,6 @@ public class Test {
     System.out.println();
     System.out.println("count " + list.countEven(list.getFirst()));
     System.out.println("sum " + list.sumLinkedList(list.getFirst()));
+
   }
 }
