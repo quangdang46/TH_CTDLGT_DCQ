@@ -7,7 +7,6 @@ public class Test{
 		list.addFirst(5);
 		list.addFirst(1);
 		list.addFirst(7);
-		System.out.println(list);
 		list.removeFifthElement();
 		System.out.println(list);
 		System.out.println(list.lastEvenPosition());		
