@@ -2,6 +2,7 @@ public class Node {
   private int data;
   private Node left;
   private Node right;
+  private int height;
 
   public Node(int data) {
     this.data = data;
@@ -29,7 +30,12 @@ public class Node {
     this.right = right;
   }
 
+  public void setHeight(int height) {
+    this.height = height;
+  }
 
-  
+  public int getHeight() {
+    return height;
+  }
 
 }
