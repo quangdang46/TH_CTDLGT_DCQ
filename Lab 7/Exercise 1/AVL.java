@@ -115,4 +115,70 @@ public class AVL {
     return x;
   }
 
+  public void printTree(Node curr, String indent, boolean last) {
+    if (curr == null)
+      return;
+
+    System.out.print(indent);
+    if (last) {
+      System.out.print("R----");
+      indent += "   ";
+    } else {
+      System.out.print("L----");
+      indent += "|  ";
+    }
+    System.out.println(curr.getData());
+    printTree(curr.getLeft(), indent, false);
+    printTree(curr.getRight(), indent, true);
+
+  }
+  
+
+  public Node minValueNode(Node node) {
+    Node current = node;
+    while (current.getLeft() != null) {
+      current = current.getLeft();
+    }
+    return current;
+  }
+
+  public Node delete(Node node, int data) {
+    if (node == null) {
+      return null;
+    }
+    
+    if (data < node.getData()) {
+      node.setLeft(delete(node.getLeft(), data));
+    } else if (data > node.getData()) {
+      node.setRight(delete(node.getRight(), data));
+    } else {
+      if (node.getLeft() == null) {
+        return node.getRight();
+      } else if (node.getRight() == null) {
+        return node.getLeft();
+      }
+      node.setData(minValueNode(node.getRight()).getData());
+      node.setRight(delete(node.getRight(), node.getData()));
+    }
+    node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())) + 1);
+    int balance = checkBalance(node);
+    if (balance > 1) {
+      if (checkBalance(node.getLeft()) >= 0) {
+        return rotateRight(node);
+      } else {
+        node.setLeft(rotateLeft(node.getLeft()));
+        return rotateRight(node);
+      }
+    }
+    if (balance < -1) {
+      if (checkBalance(node.getRight()) <= 0) {
+        return rotateLeft(node);
+      } else {
+        node.setRight(rotateRight(node.getRight()));
+        return rotateLeft(node);
+      }
+    }
+    return node;
+
+  }
 }

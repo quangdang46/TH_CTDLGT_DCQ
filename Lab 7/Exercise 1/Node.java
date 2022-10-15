@@ -37,5 +37,7 @@ public class Node {
   public int getHeight() {
     return height;
   }
-
+  public void setData(int data) {
+    this.data = data;
+  }
 }
