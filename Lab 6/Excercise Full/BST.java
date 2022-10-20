@@ -3,6 +3,7 @@ import java.util.Queue;
 
 public class BST {
   private Node root;
+  private int rootValue=Integer.MAX_VALUE;
 
   public BST() {
     this.root = null;
@@ -233,10 +234,15 @@ public class BST {
 
   // Ex9
   public int sum(Node x) {
+    if (rootValue == Integer.MAX_VALUE) {
+      rootValue = x.getData();
+    } else {
+      rootValue = 0;
+    }
     if (x == null) {
       return 0;
     }
-    return x.getData() + sum(x.getLeft()) + sum(x.getRight());
+    return x.getData()-rootValue + sum(x.getLeft()) + sum(x.getRight());
   }
   // Ex10
 
