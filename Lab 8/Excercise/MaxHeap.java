@@ -5,7 +5,7 @@ public class MaxHeap {
 
   public MaxHeap(int capacity) {
     heapSize = 0;
-    maxSize = capacity;
+    maxSize = capacity+1;
     heap = new int[maxSize];
     heap[0] = -1;
   }
