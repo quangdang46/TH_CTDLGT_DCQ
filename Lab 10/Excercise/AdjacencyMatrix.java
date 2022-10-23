@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class AdjacencyMatrix {
   private int[][] adj;
@@ -41,48 +43,81 @@ public class AdjacencyMatrix {
 
   public void Kruskal() {
     UnionFind union = new UnionFind(NUMBER_OF_VERTICES);
-    int[][] result = new int[NUMBER_OF_VERTICES][NUMBER_OF_VERTICES];
-    int[] edge = new int[3];
-    int index = 0;
-    int total = 0;
-
-    while (index < NUMBER_OF_VERTICES - 1) {
-      edge = getMinEdge();
-      if (!union.isSameSet(edge[0], edge[1])) {
-        result[index][0] = edge[0];
-        result[index][1] = edge[1];
-        result[index][2] = edge[2];
-        union.unionSet(edge[0], edge[1]);
-        index++;
-        total += edge[2];
-      }
-      adj[edge[0]][edge[1]] = Integer.MAX_VALUE;
-      adj[edge[1]][edge[0]] = Integer.MAX_VALUE;
-    }
-    
-    //print mst
-    for (int i = 0; i < NUMBER_OF_VERTICES - 1; i++) {
-      System.out.println("Edge: " + result[i][0] + " - " + result[i][1] + " weight: " + result[i][2]);
-    }
-
-  }
-
-  private int[] getMinEdge() {
-    int[] edge = new int[3];
-    edge[0] = -1;
-    edge[1] = -1;
-    edge[2] = Integer.MAX_VALUE;
+    int minCost = 0;
+    int edgeCount = 0;
+    int[][] sortedEdges = new int[NUMBER_OF_VERTICES * NUMBER_OF_VERTICES][3];
     for (int i = 0; i < NUMBER_OF_VERTICES; i++) {
       for (int j = 0; j < NUMBER_OF_VERTICES; j++) {
-        if (adj[i][j] < edge[2]) {
-          edge[0] = i;
-          edge[1] = j;
-          edge[2] = adj[i][j];
+        if (adj[i][j] != 0) {
+          sortedEdges[edgeCount][0] = adj[i][j];
+          sortedEdges[edgeCount][1] = i;
+          sortedEdges[edgeCount][2] = j;
+          edgeCount++;
         }
       }
     }
-    return edge;
+    Arrays.sort(sortedEdges, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o1[0] - o2[0];
+      }
+    });
+    for (int i = 0; i < edgeCount; i++) {
+      int weight = sortedEdges[i][0];
+      int vertexSource = sortedEdges[i][1];
+      int vertexDestination = sortedEdges[i][2];
+      if (union.findSet(vertexSource) != union.findSet(vertexDestination)) {
+        union.unionSet(vertexSource, vertexDestination);
+        System.out.println("Edge (" + vertexSource + ", " + vertexDestination + "): " + weight);
+        minCost += weight;
+      }
+    }
+
+    System.out.println("Minimum cost: " + minCost);
+
   }
+
+  public void Prim() {
+    int[] parent = new int[NUMBER_OF_VERTICES];
+    int[] key = new int[NUMBER_OF_VERTICES];
+    boolean[] mstSet = new boolean[NUMBER_OF_VERTICES];
+    for (int i = 0; i < NUMBER_OF_VERTICES; i++) {
+      key[i] = Integer.MAX_VALUE;
+      mstSet[i] = false;
+    }
+    key[0] = 0;
+    parent[0] = -1;
+    for (int i = 0; i < NUMBER_OF_VERTICES - 1; i++) {
+      int u = minKey(key, mstSet);
+      mstSet[u] = true;
+      for (int v = 0; v < NUMBER_OF_VERTICES; v++) {
+        if (adj[u][v] != 0 && mstSet[v] == false && adj[u][v] < key[v]) {
+          parent[v] = u;
+          key[v] = adj[u][v];
+        }
+      }
+    }
+    int minCost = 0;
+    for (int i = 1; i < NUMBER_OF_VERTICES; i++) {
+      System.out.println("Edge (" + parent[i] + ", " + i + "): " + adj[i][parent[i]]);
+      minCost += adj[i][parent[i]];
+    }
+    System.out.println("Minimum cost: " + minCost);
+    
+  }
+
+  private int minKey(int[] key, boolean[] mstSet) {
+    int min = Integer.MAX_VALUE;
+    int minIndex = -1;
+    for (int i = 0; i < NUMBER_OF_VERTICES; i++) {
+      if (mstSet[i] == false && key[i] < min) {
+        min = key[i];
+        minIndex = i;
+      }
+    }
+    return minIndex;
+  }
+
 
 
 

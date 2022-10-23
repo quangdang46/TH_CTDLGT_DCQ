@@ -9,6 +9,7 @@ public class Test {
         { 0, 6, 6, 0, 7 },
         { 5, 1, 2, 7, 0 }
     };
+
     for (int i = 0; i < data.length; i++) {
       for (int j = 0; j < data[i].length; j++) {
         adj.setEdge(i, j, data[i][j]);
@@ -16,6 +17,8 @@ public class Test {
     }
 
     adj.Kruskal();
+    System.out.println();
+    adj.Prim();
 
 
 
