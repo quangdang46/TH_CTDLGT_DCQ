@@ -1,6 +1,5 @@
 public class Package {
   private String code;
-
   private String country;
   private int price;
 
