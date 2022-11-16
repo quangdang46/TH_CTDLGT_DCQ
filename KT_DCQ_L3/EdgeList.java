@@ -28,8 +28,13 @@ public class EdgeList {
 
     // Cau 2
     public ArrayList<String> getDestinationsByVisitorRating(int v, int r) {
-
-        return null;
+        ArrayList<String> names = new ArrayList<String>();
+        for (VisitedObject obj : visitedObjects) {
+            if (obj.getVisitor().getId() == v && obj.getRating() >= r) {
+                names.add(obj.getDestination().getName());
+            }
+        }
+        return names;
     }
 
     // Cau 3
