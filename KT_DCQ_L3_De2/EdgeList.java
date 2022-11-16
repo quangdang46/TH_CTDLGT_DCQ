@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class EdgeList {
@@ -48,8 +49,22 @@ public class EdgeList {
 
     // Cau 4
     public ArrayList<String> findOddDegree() {
-        // code here
-        return null;
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        for (VisitedObject obj : visitedObjects) {
+            String name = obj.getDestination().getName();
+            if (map.containsKey(name)) {
+                map.put(name, map.get(name) + 1);
+            } else {
+                map.put(name, 1);
+            }
+        }
+        ArrayList<String> data = new ArrayList<String>();
+        for (String key : map.keySet()) {
+            if (map.get(key) % 2 == 1) {
+                data.add(key);
+            }
+        }
+        return data;
     }
 
 }
