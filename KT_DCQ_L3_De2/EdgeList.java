@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class EdgeList {
 
@@ -14,20 +15,35 @@ public class EdgeList {
 
     // Cau 1
     public int findNumberDestinations() {
-        // code here
-        return -1;
+        HashSet<Integer> set = new HashSet<Integer>();
+        for (VisitedObject obj : visitedObjects) {
+            set.add(obj.getDestination().getId());
+        }
+        return set.size();
     }
 
     // Cau 2
     public ArrayList<String> getVisitorsByDestinationRating(int d, int r) {
-        // code here
-        return null;
+        ArrayList<String> data = new ArrayList<String>();
+        for (VisitedObject obj : visitedObjects) {
+            if (obj.getDestination().getId() == d && obj.getRating() == r) {
+                data.add(obj.getVisitor().getName());
+            }
+        }
+        return data;
     }
 
     // Cau 3
     public double getAverageRating(int id) {
-        // code here
-        return -1;
+        double sum = 0;
+        int count = 0;
+        for (VisitedObject obj : visitedObjects) {
+            if (obj.getVisitor().getId() == id) {
+                sum += obj.getRating();
+                count++;
+            }
+        }
+        return sum / count;
     }
 
     // Cau 4
