@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class EdgeList {
@@ -53,15 +54,17 @@ public class EdgeList {
     // Cau 4
     public ArrayList<String> findEvenDegree() {
         ArrayList<String> names = new ArrayList<String>();
+        HashMap<Visitor, Integer> map = new HashMap<Visitor, Integer>();
         for (VisitedObject obj : visitedObjects) {
-            int count = 0;
-            for (VisitedObject obj1 : visitedObjects) {
-                if (obj.getDestination().getId() == obj1.getDestination().getId()) {
-                    count++;
-                }
+            if (map.containsKey(obj.getVisitor())) {
+                map.put(obj.getVisitor(), map.get(obj.getVisitor()) + 1);
+            } else {
+                map.put(obj.getVisitor(), 1);
             }
-            if (count % 2 == 0) {
-                names.add(obj.getDestination().getName());
+        }
+        for (Visitor v : map.keySet()) {
+            if (map.get(v) % 2 == 0) {
+                names.add(v.getName());
             }
         }
         return names;
