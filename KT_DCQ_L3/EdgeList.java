@@ -39,13 +39,31 @@ public class EdgeList {
 
     // Cau 3
     public double getAverageRating(int id) {
-
-        return 1.0;
+        double sum = 0;
+        int count = 0;
+        for (VisitedObject obj : visitedObjects) {
+            if (obj.getDestination().getId() == id) {
+                sum += obj.getRating();
+                count++;
+            }
+        }
+        return sum / count;
     }
 
     // Cau 4
     public ArrayList<String> findEvenDegree() {
-
-        return null;
+        ArrayList<String> names = new ArrayList<String>();
+        for (VisitedObject obj : visitedObjects) {
+            int count = 0;
+            for (VisitedObject obj1 : visitedObjects) {
+                if (obj.getDestination().getId() == obj1.getDestination().getId()) {
+                    count++;
+                }
+            }
+            if (count % 2 == 0) {
+                names.add(obj.getDestination().getName());
+            }
+        }
+        return names;
     }
 }
